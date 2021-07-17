@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if location %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    New warehouse added: <strong>{{location}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+<h1>{{location}}</h1>
+<form action="{{ url_for('create_warehouse') }}" method="POST">
+  <div class="form-group">
+    <label for="location">New Warehouse Location:</label>
+    <input type="text" name="location" class="form-control" id="whInput" placeholder="Enter new warehouse location">
+  </div>
+  <div class="form-group">
+    <label for="storeSelect">Select Store:</label>
+    <select name='store_select' class="form-control" id="storeSelect">
+      {% for item in s %}
+      <option value="{{item.id}}">{{item.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
